@@ -5,22 +5,48 @@ st.title("🍎 ¿Qué fruta es más parecida?")
 
 st.write("Introduce las características de una fruta.")
 
-# Datos de la fruta que queremos analizar
-peso = st.number_input("Peso (gramos)", value=180)
-diametro = st.number_input("Diámetro (cm)", value=7.0)
-dulzor = st.number_input("Dulzor (0 - 10)", value=8.0)
+# ============================================================
+# DATOS DE LA FRUTA INGRESADA POR EL USUARIO
+# ============================================================
+
+peso = st.number_input(
+    "Peso (gramos)",
+    value=180
+)
+
+diametro = st.number_input(
+    "Diámetro (cm)",
+    value=7.0
+)
+
+dulzor = st.number_input(
+    "Dulzor (0 - 10)",
+    value=8.0
+)
 
 # Convertimos los datos en un vector
 fruta_usuario = [peso, diametro, dulzor]
 
 st.write("Vector de tu fruta:", fruta_usuario)
 
-# Frutas conocidas
+
+# ============================================================
+# FRUTAS CONOCIDAS
+# ============================================================
+
 manzana = [170, 7.0, 7]
+
 banano = [120, 5.0, 9]
+
 naranja = [200, 8.0, 6]
 
-# Calculamos las distancias
+# NUEVA FRUTA: PERA 🍐
+pera = [160, 6.5, 7.5]
+
+
+# ============================================================
+# CALCULAMOS LAS DISTANCIAS
+# ============================================================
 
 distancia_manzana = math.sqrt(
     (fruta_usuario[0] - manzana[0])**2 +
@@ -40,22 +66,52 @@ distancia_naranja = math.sqrt(
     (fruta_usuario[2] - naranja[2])**2
 )
 
-# Mostramos las distancias
-st.subheader("Distancias")
+# DISTANCIA DE LA PERA 🍐
+distancia_pera = math.sqrt(
+    (fruta_usuario[0] - pera[0])**2 +
+    (fruta_usuario[1] - pera[1])**2 +
+    (fruta_usuario[2] - pera[2])**2
+)
 
-st.write("🍎 Manzana:", distancia_manzana)
-st.write("🍌 Banano:", distancia_banano)
-st.write("🍊 Naranja:", distancia_naranja)
 
-# Buscamos la distancia menor
+# ============================================================
+# MOSTRAMOS LAS DISTANCIAS
+# ============================================================
+
+st.subheader("📏 Distancias")
+
+st.write("🍎 Manzana:", round(distancia_manzana, 2))
+
+st.write("🍌 Banano:", round(distancia_banano, 2))
+
+st.write("🍊 Naranja:", round(distancia_naranja, 2))
+
+st.write("🍐 Pera:", round(distancia_pera, 2))
+
+
+# ============================================================
+# BUSCAMOS LA FRUTA MÁS PARECIDA
+# ============================================================
+
 distancias = {
     "🍎 Manzana": distancia_manzana,
     "🍌 Banano": distancia_banano,
-    "🍊 Naranja": distancia_naranja
+    "🍊 Naranja": distancia_naranja,
+    "🍐 Pera": distancia_pera
 }
 
-fruta_mas_parecida = min(distancias, key=distancias.get)
+fruta_mas_parecida = min(
+    distancias,
+    key=distancias.get
+)
 
-st.subheader("Resultado")
 
-st.success(f"La fruta más parecida es: {fruta_mas_parecida}")
+# ============================================================
+# RESULTADO
+# ============================================================
+
+st.subheader("🏆 Resultado")
+
+st.success(
+    f"La fruta más parecida es: {fruta_mas_parecida}"
+)
